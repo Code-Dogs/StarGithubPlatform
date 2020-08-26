@@ -1,5 +1,5 @@
 [//]: # (调研文档)
-
+aa
 ## 几个重要的api
 1. github第三方授权实现方案，最终获取token令牌实现认证：https://www.ruanyifeng.com/blog/2019/04/github-oauth.html
 2. github rest api 关注相关api ： https://developer.github.com/v3/activity/starring/
