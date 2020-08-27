@@ -13,4 +13,4 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         TARGET_REPO: Code-Dogs/StarGithubPlatform
         BUILD_SCRIPT: cd wiki && npm install && npm run docs:build
-        BUILD_DIR: StarGithubPlatform/wiki/docs/.vuepress/dist/
+        BUILD_DIR: wiki/docs/.vuepress/dist/
