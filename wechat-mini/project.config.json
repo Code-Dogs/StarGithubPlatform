@@ -11,6 +11,7 @@
     "minified": true,
     "newFeature": true,
     "coverView": true,
+    "nodeModules": true,
     "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
     "scopeDataCheck": false,
@@ -29,12 +30,11 @@
     "userConfirmedUseCompilerModuleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "nodeModules": true
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.0.4",
-  "appid": "wx65c1f995dab45200",
+  "appid": "wx58460aba03595b77",
   "projectname": "githubStarMiniProgram",
   "debugOptions": {
     "hidedInDevtools": []
