@@ -1,9 +1,7 @@
 package com.github.wxiaoqi.security.modules.admin.biz;
 
 import com.github.wxiaoqi.security.common.biz.BaseBiz;
-import com.github.wxiaoqi.security.common.util.UUIDUtils;
 import com.github.wxiaoqi.security.modules.admin.entity.User;
-import com.github.wxiaoqi.security.modules.admin.entity.WxUser;
 import com.github.wxiaoqi.security.modules.admin.mapper.UserMapper;
 import com.github.wxiaoqi.security.modules.admin.util.Sha256PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -45,15 +43,6 @@ public class UserBiz extends BaseBiz<UserMapper,User> {
     }
 
     private Sha256PasswordEncoder sha256PasswordEncoder=new Sha256PasswordEncoder();
-
-    public User createDefaultUser(WxUser wxUser){
-        User user=new User();
-        user.setUsername("wx_user_"+ sha256PasswordEncoder.encode(wxUser.getUnionId()));
-        user.setName("wx_user_"+ sha256PasswordEncoder.encode(wxUser.getUnionId()));
-        insert(user);
-        wxUser.setBaseUserId(user.getId());
-        return user;
-    }
 
 
 }

@@ -1,4 +1,4 @@
-package com.github.wxiaoqi.security.modules.wx.config;
+package com.codedog.gitstar.wx.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

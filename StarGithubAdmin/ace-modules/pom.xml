@@ -13,11 +13,12 @@
 
     <modules>
         <module>ace-admin</module>
+        <module>ace-admin-common</module>
         <module>ace-generator</module>
         <module>ace-tool</module>
         <module>ace-nlp</module>
         <module>ace-sample</module>
-        <module>gitstar</module>
+        <module>stargit</module>
         <module>gitstar-wx</module>
     </modules>
 </project>

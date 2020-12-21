@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: gitstar
+  cloud:
+    nacos:
+      config:
+        server-addr: c2.orzjj.com:8848
+        file-extension: yaml
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true

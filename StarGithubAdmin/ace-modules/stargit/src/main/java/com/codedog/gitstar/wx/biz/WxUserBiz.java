@@ -1,10 +1,8 @@
-package com.github.wxiaoqi.security.modules.admin.biz;
+package com.codedog.gitstar.wx.biz;
 
+import com.codedog.gitstar.wx.mapper.WxUserMapper;
 import com.github.wxiaoqi.security.common.biz.BaseBiz;
-import com.github.wxiaoqi.security.modules.admin.entity.User;
-import com.github.wxiaoqi.security.modules.admin.entity.WxUser;
-import com.github.wxiaoqi.security.modules.admin.mapper.UserMapper;
-import com.github.wxiaoqi.security.modules.admin.mapper.WxUserMapper;
+import com.codedog.gitstar.wx.entity.WxUser;
 import com.github.wxiaoqi.security.modules.admin.util.Sha256PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

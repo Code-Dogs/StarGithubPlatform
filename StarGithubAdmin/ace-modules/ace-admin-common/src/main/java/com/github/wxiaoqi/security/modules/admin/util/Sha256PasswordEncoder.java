@@ -27,12 +27,14 @@ package com.github.wxiaoqi.security.modules.admin.util;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import java.security.MessageDigest;
 
 /**
  * 老干爹 on 2017/8/11.
  */
+@Component
 public class Sha256PasswordEncoder implements PasswordEncoder {
 
     @Override

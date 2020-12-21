@@ -7,23 +7,18 @@ import com.github.wxiaoqi.security.api.vo.authority.PermissionInfo;
 import com.github.wxiaoqi.security.api.vo.user.UserInfo;
 import com.github.wxiaoqi.security.common.constant.CommonConstants;
 import com.github.wxiaoqi.security.common.context.BaseContextHandler;
-import com.github.wxiaoqi.security.common.exception.auth.UserInvalidException;
 import com.github.wxiaoqi.security.common.util.TreeUtil;
 import com.github.wxiaoqi.security.modules.admin.biz.ElementBiz;
 import com.github.wxiaoqi.security.modules.admin.biz.MenuBiz;
 import com.github.wxiaoqi.security.modules.admin.biz.UserBiz;
-import com.github.wxiaoqi.security.modules.admin.biz.WxUserBiz;
 import com.github.wxiaoqi.security.modules.admin.constant.AdminCommonConstant;
 import com.github.wxiaoqi.security.common.constant.RedisKeyConstant;
 import com.github.wxiaoqi.security.modules.admin.entity.Element;
 import com.github.wxiaoqi.security.modules.admin.entity.Menu;
 import com.github.wxiaoqi.security.modules.admin.entity.User;
-import com.github.wxiaoqi.security.modules.admin.entity.WxUser;
 import com.github.wxiaoqi.security.modules.admin.util.Sha256PasswordEncoder;
 import com.github.wxiaoqi.security.modules.admin.vo.*;
 import com.github.wxiaoqi.security.modules.auth.util.user.JwtTokenUtil;
-import com.github.wxiaoqi.security.modules.wx.entity.WxLoginResponse;
-import com.github.wxiaoqi.security.modules.wx.service.WxService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,14 +42,10 @@ public class PermissionService {
     private UserBiz userBiz;
 
     @Autowired
-    private WxUserBiz wxUserBiz;
-    @Autowired
     private MenuBiz menuBiz;
     @Autowired
     private ElementBiz elementBiz;
 
-    @Autowired
-    private WxService wxService;
     @Autowired
     private JwtTokenUtil userAuthUtil;
     private Sha256PasswordEncoder encoder = new Sha256PasswordEncoder();
@@ -80,28 +71,6 @@ public class PermissionService {
         return info;
     }
 
-    public UserInfo validateByCode(String code) {
-        WxLoginResponse wxLoginResponse=wxService.loginToWxByCode(code);
-        //微信code登录失败，直接返回
-        if(!wxLoginResponse.getErrCode().equals(WxLoginResponse.ErrCodeEnum.SUCCESS.getCode())){
-            throw new UserInvalidException(wxLoginResponse.getErrMsg());
-        }
-        //登录成功，登录当前系统
-        //如果不存在用户，直接注册
-        WxUser wxUser = wxUserBiz.getUserByOpenId(wxLoginResponse.getOpenId());
-        if(wxUser==null){
-            wxUser=new WxUser();
-            BeanUtils.copyProperties(wxLoginResponse,wxUser);
-            userBiz.createDefaultUser(wxUser);
-        }
-        User user=userBiz.selectById(wxUser.getBaseUserId());
-        UserInfo info=new UserInfo();
-        if(user!=null){
-            BeanUtils.copyProperties(user, info);
-            info.setId(user.getId().toString());
-        }
-        return info;
-    }
 
 
 

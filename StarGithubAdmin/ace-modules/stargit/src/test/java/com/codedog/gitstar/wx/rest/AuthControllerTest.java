@@ -1,7 +1,7 @@
-package com.github.wxiaoqi.security.modules.auth.controller;
+package com.codedog.gitstar.wx.rest;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -9,7 +9,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-public class AuthControllerTest extends BaseControllerTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class AuthControllerTest extends BaseControllerTest{
 
     @Autowired
     private AuthController authController;
@@ -26,11 +28,11 @@ public class AuthControllerTest extends BaseControllerTest {
      */
     @Test
     @Rollback(false)
-    public void testLoginByCode() throws Exception{
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/jwt/loginByCode").content("011v6K0w3UOPvV26y93w357iSM0v6K01"))
+    void createAuthenticationTokenByCode() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/jwt/loginByCode").content("021s7all2Qvqb64H2lnl2qyvXm3s7alg"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
 //                .andExpect(content().string(containsString("Hello World")))
-        .andReturn();
+                .andReturn();
     }
 }
