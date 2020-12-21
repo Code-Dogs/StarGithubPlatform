@@ -1,11 +1,11 @@
-package com.github.wxiaoqi.security.modules.wx.service;
+package com.codedog.gitstar.wx.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.codedog.gitstar.wx.config.WxConfiguration;
+import com.codedog.gitstar.wx.entity.WxLoginResponse;
 import com.github.wxiaoqi.security.common.msg.ObjectRestResponse;
 import com.github.wxiaoqi.security.common.msg.ObjectRestResponseFactory;
 import com.github.wxiaoqi.security.common.util.http.HttpUtils;
-import com.github.wxiaoqi.security.modules.wx.config.WxConfiguration;
-import com.github.wxiaoqi.security.modules.wx.entity.WxLoginResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ public class WxService {
     public WxLoginResponse loginToWxByCode(String code){
         String requestUrl= MessageFormat.format(jscode2session_url_template,wxConfiguration.getAppId(),wxConfiguration.getSecret(),code);
         String res=HttpUtils.sendGet(requestUrl,"");
-        WxLoginResponse wxLoginResponse=JSONObject.parseObject(res,WxLoginResponse.class);
+        WxLoginResponse wxLoginResponse=JSONObject.parseObject(res, WxLoginResponse.class);
         //微信实际返回和接口文档有区别，只会返回openid和sessionkey，当为空时，直接设置成功
         if(wxLoginResponse!=null&& wxLoginResponse.getErrCode()==null && StringUtils.isNotEmpty(wxLoginResponse.getOpenId())&&StringUtils.isNotEmpty(wxLoginResponse.getSessionKey())){
             wxLoginResponse.setErrCode(WxLoginResponse.ErrCodeEnum.SUCCESS.getCode());

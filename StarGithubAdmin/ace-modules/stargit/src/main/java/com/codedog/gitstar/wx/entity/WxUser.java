@@ -1,4 +1,4 @@
-package com.github.wxiaoqi.security.modules.admin.entity;
+package com.codedog.gitstar.wx.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Id;

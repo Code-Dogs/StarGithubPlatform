@@ -4,22 +4,17 @@ import com.alibaba.fastjson.JSON;
 import com.github.wxiaoqi.security.api.vo.user.UserInfo;
 import com.github.wxiaoqi.security.common.constant.RedisKeyConstant;
 import com.github.wxiaoqi.security.common.exception.auth.UserInvalidException;
-import com.github.wxiaoqi.security.common.msg.ObjectRestResponseFactory;
 import com.github.wxiaoqi.security.common.util.AddressUtils;
 import com.github.wxiaoqi.security.common.util.IpUtils;
 import com.github.wxiaoqi.security.common.util.WebUtils;
 import com.github.wxiaoqi.security.common.util.jwt.IJWTInfo;
 import com.github.wxiaoqi.security.common.util.jwt.JWTInfo;
-import com.github.wxiaoqi.security.modules.admin.biz.UserBiz;
 import com.github.wxiaoqi.security.modules.admin.entity.OnlineLog;
-import com.github.wxiaoqi.security.modules.admin.entity.User;
 import com.github.wxiaoqi.security.modules.admin.rpc.service.PermissionService;
 import com.github.wxiaoqi.security.modules.auth.bean.LoginResponseData;
 import com.github.wxiaoqi.security.modules.auth.service.AuthService;
 import com.github.wxiaoqi.security.modules.auth.util.user.JwtAuthenticationRequest;
 import com.github.wxiaoqi.security.modules.auth.util.user.JwtTokenUtil;
-import com.github.wxiaoqi.security.modules.wx.entity.WxLoginResponse;
-import com.github.wxiaoqi.security.modules.wx.service.WxService;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,9 +39,6 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    @Autowired
-    private WxService wxService;
-
     @Value("${jwt.expire}")
     private int expire;
 
@@ -60,16 +52,16 @@ public class AuthServiceImpl implements AuthService {
         throw new UserInvalidException("用户不存在或账户密码错误!");
     }
 
-    @Override
-    public LoginResponseData loginByCode(String code) throws Exception {
-        UserInfo info = permissionService.validateByCode(code);
-        if (!StringUtils.isEmpty(info.getId())) {
-            return generateLoginToken2(info);
-        }
-        throw new UserInvalidException("用户不存在或账户密码错误!");
-    }
+//    @Override
+//    public LoginResponseData loginByCode(String code) throws Exception {
+//        UserInfo info = permissionService.validateByCode(code);
+//        if (!StringUtils.isEmpty(info.getId())) {
+//            return generateLoginToken2(info);
+//        }
+//        throw new UserInvalidException("用户不存在或账户密码错误!");
+//    }
 
-    private Map generateLoginToken(UserInfo info) throws Exception {
+    public Map generateLoginToken(UserInfo info) throws Exception {
         JWTInfo jwtInfo = new JWTInfo(info.getUsername(), info.getId() + "", info.getName());
         String token = jwtTokenUtil.generateToken(jwtInfo);
         Map<String, String> result = new HashMap<>();

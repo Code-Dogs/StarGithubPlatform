@@ -1,11 +1,8 @@
-package com.github.wxiaoqi.security.modules.admin.mapper;
+package com.codedog.gitstar.wx.mapper;
 
-import com.github.wxiaoqi.security.modules.admin.entity.User;
-import com.github.wxiaoqi.security.modules.admin.entity.WxUser;
+import com.codedog.gitstar.wx.entity.WxUser;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
-
-import java.util.List;
 
 public interface WxUserMapper extends Mapper<WxUser> {
     public WxUser selectWxUserByOpenId(@Param("openId") String openId);

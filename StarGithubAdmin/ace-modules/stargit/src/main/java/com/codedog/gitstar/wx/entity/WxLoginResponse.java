@@ -1,4 +1,4 @@
-package com.github.wxiaoqi.security.modules.wx.entity;
+package com.codedog.gitstar.wx.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import io.swagger.annotations.ApiModel;

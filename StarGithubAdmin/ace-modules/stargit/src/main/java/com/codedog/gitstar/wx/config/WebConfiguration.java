@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.ArrayList;
 import java.util.Collections;
 
-@Configuration("admimWebConfig")
+@Configuration("stargitWebConfig")
 @Primary
 public class WebConfiguration implements WebMvcConfigurer {
     @Bean
@@ -25,7 +25,6 @@ public class WebConfiguration implements WebMvcConfigurer {
     // 配置用户认证拦截器    
         registry.addInterceptor(getUserAuthRestInterceptor()). addPathPatterns(getIncludePathPatterns());
     }
-
 
     @Bean
     UserAuthRestInterceptor getUserAuthRestInterceptor() {
